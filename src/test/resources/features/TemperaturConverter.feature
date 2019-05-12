@@ -1,6 +1,6 @@
 @TemperatureConverter 
 Feature: I want to convert the given centigrade temperature value into
-Fahrenheit value through a standard java program and an online converter application
+Fahrenheit value through a standard java program and an online converter applications
 		
 @ConverterViaStandardJavaPrgram
 Scenario Outline: Centigrade to Fahrenheit Converter through standard java program
