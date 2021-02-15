@@ -20,7 +20,7 @@ public class TemperatureConvertorApplicationPage {
 	WebDriver webDriver = null;
 	CommonUtils objCommonUtils = new CommonUtils();
 	static Logger log = Logger.getLogger(TemperatureConvertorApplicationPage.class.getName());
-	
+
 	// Creating webelement and getters
 	@FindBy(how = How.XPATH, using = "//h1[text()='Celsius to Fahrenheit conversion']")
 	private WebElement pageTitle;
@@ -36,14 +36,21 @@ public class TemperatureConvertorApplicationPage {
 
 	@FindBy(how = How.XPATH, using = "//button[@title=\"Convert\"]")
 	private WebElement convertBtn;
-	
+
+	@FindBy(how = How.XPATH, using = "//a[contains(text(),'support@seleniumframework.com')]")
+	private WebElement emailLink;
+
+	public WebElement getEmailLink() {
+		return emailLink;
+	}
+
 	/**
 	 * @return the convertBtn
 	 */
 	public WebElement getConvertBtn() {
 		return convertBtn;
 	}
-		
+
 	/**
 	 * @return the celsiusInputBox
 	 */
@@ -73,7 +80,9 @@ public class TemperatureConvertorApplicationPage {
 	}
 
 	/**
-	 * class constructor to initialize the driver instance and webelement using pagefactory
+	 * class constructor to initialize the driver instance and webelement using
+	 * pagefactory
+	 * 
 	 * @param webDriver
 	 */
 	public TemperatureConvertorApplicationPage(WebDriver webDriver) {
@@ -83,62 +92,70 @@ public class TemperatureConvertorApplicationPage {
 
 	/**
 	 * to launching the application
+	 * 
 	 * @param url
 	 */
 	public void lanuch_Application(String url) {
 		webDriver.get(url);
-		log.info(url +" launch");
+		log.info(url + " launch");
 	}
 
 	/**
 	 * to verify application contains the desired doc string
+	 * 
 	 * @param docString
 	 * @throws IOException
 	 */
 	public void page_should_contains_title(String docString) throws IOException {
 		String pageContent = getRapidTablesLink().getText() + "\n" + getPageTitle().getText();
 		assertEquals(docString, pageContent);
-		
-		log.info(docString+" is verified");
+
+		log.info(docString + " is verified");
 		objCommonUtils.captureScreenShot(webDriver, "docString");
 	}
 
 	/**
 	 * To enter the celsius value
+	 * 
 	 * @param celsiusValue
 	 * @throws IOException
 	 */
 	public void enterCelsiusValue(double celsiusValue) throws IOException {
-		objCommonUtils.enterInput(getCelsiusInputBox(), celsiusValue+"");
-		
-		log.info(celsiusValue+" value entered");
+		objCommonUtils.enterInput(getCelsiusInputBox(), celsiusValue + "");
+
+		log.info(celsiusValue + " value entered");
 		objCommonUtils.captureScreenShot(webDriver, getCelsiusInputBox().getAttribute("name"));
 	}
-	
+
 	/**
 	 * to click on convert button
 	 */
 	public void click_on_convert_button() {
-		if(getConvertBtn().isEnabled()) {
+		if (getConvertBtn().isEnabled()) {
 			getConvertBtn().click();
 			log.info("convert button clicked");
 		}
 	}
-	
+
 	/**
 	 * @author Bhagwat
 	 * @param fah
-	 * @throws IOException 
-	 * to check the output is correct after converting the values
+	 * @throws IOException
+	 *             to check the output is correct after converting the values
 	 */
 	public void check_in_output_box(double expectedFahValue) throws IOException {
-		if(getFahrenheitInputBox().isDisplayed()) {
+		if (getFahrenheitInputBox().isDisplayed()) {
 			String getFahValue = getFahrenheitInputBox().getAttribute("value");
 			System.err.println(getFahValue);
 			double actualFahValue = Double.parseDouble(getFahValue);
 			Assert.assertTrue(expectedFahValue == actualFahValue);
-			log.info(expectedFahValue+" value found in the eoutput");
+			log.info(expectedFahValue + " value found in the eoutput");
 			objCommonUtils.captureScreenShot(webDriver, getFahrenheitInputBox().getAttribute("name"));
 		}
+	}
+
+	public void clickOn(String link) {
+		getEmailLink().click();	
+		CommonUtils.verifyMail("bhagwat.prajapati@lfg.com", "123@Khu_shi", "support@seleniumframework.com");
 	}
 }

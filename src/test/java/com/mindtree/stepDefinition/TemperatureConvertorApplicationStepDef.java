@@ -3,6 +3,7 @@ package com.mindtree.stepDefinition;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.mindtree.pages.TemperatureConvertorApplicationPage;
@@ -24,14 +25,18 @@ public class TemperatureConvertorApplicationStepDef {
 	 */
 	@Before("@ConverterApplication")
 	public void setUp() {
-		System.setProperty("webdriver.gecko.driver",
-				System.getProperty("user.dir") + "/src/test/resources/" + "Drivers/" + "geckodriver.exe");
-		driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver",
+				System.getProperty("user.dir") + "/src/test/resources/" + "Drivers/" + "chromedriver.exe");
+		driver = new ChromeDriver();
 
 		driver.manage().window().maximize();
 		objTemperatureConvertorApplicationPage = new TemperatureConvertorApplicationPage(driver);
 	}
 	
+	@Then("click on link")
+	public void clickOn() {
+		objTemperatureConvertorApplicationPage.clickOn("support@seleniumframework.com");
+	}
 	
 	@Given("lanuch {string} Application")
 	public void lanuch_Application(String url) {
