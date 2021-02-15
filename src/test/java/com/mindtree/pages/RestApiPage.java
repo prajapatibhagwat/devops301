@@ -2,7 +2,7 @@ package com.mindtree.pages;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import junit.framework.Assert;
 import okhttp3.OkHttpClient;
@@ -13,7 +13,7 @@ public class RestApiPage {
 	static Request request;
 	OkHttpClient client = new OkHttpClient();
 	static Response response;
-	static Logger log = Logger.getLogger(RestApiPage.class.getName());
+	//static Logger log = Logger.getLogger(RestApiPage.class.getName());
 	
 	/**
 	 * To laucnch the github repository
@@ -24,7 +24,7 @@ public class RestApiPage {
 				.addHeader("cache-control", "no-cache")
 				.addHeader("postman-token", "6c2bf264-4a24-09bc-a6e5-baf3d7d00fb0").build();
 		
-		log.info("Github repository launch");
+		//log.info("Github repository launch");
 		
 	}
 
@@ -35,7 +35,7 @@ public class RestApiPage {
 	public void searchTheRepository() throws IOException {
 		response = client.newCall(request).execute();
 		System.err.println(response.body().toString());
-		log.info("Rest request make");
+		//log.info("Rest request make");
 	}
 
 	/**
@@ -44,6 +44,6 @@ public class RestApiPage {
 	 */
 	public void checkResponseCodeInOutput(Integer code) {
 		Assert.assertTrue(response.code() == code);
-		log.info(code+ " code found in the response");
+		//log.info(code+ " code found in the response");
 	}
 }

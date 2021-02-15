@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +19,7 @@ public class TemperatureConvertorApplicationPage {
 
 	WebDriver webDriver = null;
 	CommonUtils objCommonUtils = new CommonUtils();
-	static Logger log = Logger.getLogger(TemperatureConvertorApplicationPage.class.getName());
+	//static Logger log = Logger.getLogger(TemperatureConvertorApplicationPage.class.getName());
 
 	// Creating webelement and getters
 	@FindBy(how = How.XPATH, using = "//h1[text()='Celsius to Fahrenheit conversion']")
@@ -97,7 +97,7 @@ public class TemperatureConvertorApplicationPage {
 	 */
 	public void lanuch_Application(String url) {
 		webDriver.get(url);
-		log.info(url + " launch");
+		//log.info(url + " launch");
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class TemperatureConvertorApplicationPage {
 		String pageContent = getRapidTablesLink().getText() + "\n" + getPageTitle().getText();
 		assertEquals(docString, pageContent);
 
-		log.info(docString + " is verified");
+		//log.info(docString + " is verified");
 		objCommonUtils.captureScreenShot(webDriver, "docString");
 	}
 
@@ -123,7 +123,7 @@ public class TemperatureConvertorApplicationPage {
 	public void enterCelsiusValue(double celsiusValue) throws IOException {
 		objCommonUtils.enterInput(getCelsiusInputBox(), celsiusValue + "");
 
-		log.info(celsiusValue + " value entered");
+		//log.info(celsiusValue + " value entered");
 		objCommonUtils.captureScreenShot(webDriver, getCelsiusInputBox().getAttribute("name"));
 	}
 
@@ -133,7 +133,7 @@ public class TemperatureConvertorApplicationPage {
 	public void click_on_convert_button() {
 		if (getConvertBtn().isEnabled()) {
 			getConvertBtn().click();
-			log.info("convert button clicked");
+			//log.info("convert button clicked");
 		}
 	}
 
@@ -149,7 +149,7 @@ public class TemperatureConvertorApplicationPage {
 			System.err.println(getFahValue);
 			double actualFahValue = Double.parseDouble(getFahValue);
 			Assert.assertTrue(expectedFahValue == actualFahValue);
-			log.info(expectedFahValue + " value found in the eoutput");
+			//log.info(expectedFahValue + " value found in the eoutput");
 			objCommonUtils.captureScreenShot(webDriver, getFahrenheitInputBox().getAttribute("name"));
 		}
 	}
